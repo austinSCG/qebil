@@ -62,8 +62,7 @@ class StudyTest(unittest.TestCase):
         "secondary_sample_accession",
         "run_accession",
         "experiment_accession",
-        "fastq_bytes"
-        "fastq_ftp",
+        "fastq_bytes" "fastq_ftp",
         "library_source",
         "instrument_platform",
         "submitted_format",
@@ -109,15 +108,15 @@ class StudyTest(unittest.TestCase):
         valid_study = Study.from_remote(
             self.test_study_valid_id, full_details=True, max_samples=2
         )
-        #valid_study.metadata.to_csv('./new_test.tsv', sep='\t', index_label='sample_name')
+        # valid_study.metadata.to_csv('./new_test.tsv', sep='\t', index_label='sample_name')
         test_df = pd.read_csv(
             self.test_study_valid_tsv, header=0, sep="\t", dtype=str
         )
         test_df["sample_name"] = test_df["sample_accession"]
         test_df = test_df.set_index("sample_name")
-        #print(valid_study.metadata.columns)
-        #print(test_df.columns)
-        
+        # print(valid_study.metadata.columns)
+        # print(test_df.columns)
+
         assert_frame_equal(
             valid_study.metadata.sort_index(axis=1),
             test_df.sort_index(axis=1),
@@ -483,7 +482,7 @@ class StudyTest(unittest.TestCase):
         test_study.populate_details()
         self.assertEqual(test_study.details, test_study_dict)
 
-        
+
 if __name__ == "__main__":
     # begin the unittest.main()
     unittest.main()

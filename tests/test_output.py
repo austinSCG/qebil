@@ -39,15 +39,15 @@ class OutputTest(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
         # clean up the directory at the start
-        #tidy_list = glob.glob(_TEST_OUTPUT_DIR + "/*.tsv")
-        #for c in tidy_list:
+        # tidy_list = glob.glob(_TEST_OUTPUT_DIR + "/*.tsv")
+        # for c in tidy_list:
         #    if path.isfile(c):
         #         remove(c)
 
     def tearDown(self):
         self.runner = None
         # clean up the directory at the start
-        #for c in _CLEANUP_LIST:
+        # for c in _CLEANUP_LIST:
         #    if path.isfile(c):
         #        remove(c)
 
@@ -443,7 +443,7 @@ class OutputTest(unittest.TestCase):
             _TEST_OUTPUT_DIR + "/test_raw_SRP283872.EBI_metadata.tsv",
             sep="\t",
             header=0,
-        )        
+        )
         created_sample_df = pd.read_csv(
             _TEST_OUTPUT_DIR + "/test_qiita_SRP283872_sample_info.tsv",
             sep="\t",
@@ -465,7 +465,9 @@ class OutputTest(unittest.TestCase):
         """Tests the creation of sample and prep information files"""
         test_study = Study.from_remote(test_study_id, full_details=True)
         test_study.populate_preps()
-        print("test_study columns: " + str(sorted(test_study.metadata.columns)))
+        print(
+            "test_study columns: " + str(sorted(test_study.metadata.columns))
+        )
         write_qebil_info_files(
             test_study,
             _TEST_OUTPUT_DIR,
@@ -492,11 +494,11 @@ class OutputTest(unittest.TestCase):
             + "/test_qiita2_prep_info_PAIRED_Metagenomic_0_part0.MISSING.tsv",
             sep="\t",
             header=0,
-        )       
+        )
         print("test_sample_df columns:" + str(sorted(test_sample_df.columns)))
         print(
-           "created_sample_df columns:"
-           + str(sorted(created_sample_df.columns))
+            "created_sample_df columns:"
+            + str(sorted(created_sample_df.columns))
         )
         assert_frame_equal(
             test_sample_df.sort_index(axis=1),

@@ -431,7 +431,7 @@ def write_prep_files(
             ]
             prep_df = prep_df.dropna(axis=1, how="all")
             prep_df_list = [
-                prep_df[i: i + max_prep]
+                prep_df[i : i + max_prep]
                 for i in range(0, prep_df.shape[0], max_prep)
             ]
             prep_count = 0

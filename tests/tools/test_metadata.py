@@ -449,7 +449,7 @@ class metadataTest(unittest.TestCase):
             sep="\t",
             header=0,
             dtype=str,
-            index_col=0
+            index_col=0,
         )
         merge_df = pd.read_csv(
             _TEST_SUPPORT_DIR + "/test_merger_metadata.tsv",
@@ -462,11 +462,13 @@ class metadataTest(unittest.TestCase):
             sep="\t",
             header=0,
             dtype=str,
-            index_col=0
+            index_col=0,
         )
         merger_col = "library_name"
         result_df = merge_metadata(base_df, merge_df, merger_col)
-        assert_frame_equal(expected_df.sort_index(axis=1), result_df.sort_index(axis=1))
+        assert_frame_equal(
+            expected_df.sort_index(axis=1), result_df.sort_index(axis=1)
+        )
 
     def test_merge_metadata_auto(self):
         base_df = pd.read_csv(
@@ -474,7 +476,7 @@ class metadataTest(unittest.TestCase):
             sep="\t",
             header=0,
             dtype=str,
-            index_col=0
+            index_col=0,
         )
         merge_df = pd.read_csv(
             _TEST_SUPPORT_DIR + "/test_merger_metadata.tsv",
@@ -487,10 +489,12 @@ class metadataTest(unittest.TestCase):
             sep="\t",
             header=0,
             dtype=str,
-            index_col=0
+            index_col=0,
         )
         result_df = merge_metadata(base_df, merge_df, "auto")
-        assert_frame_equal(expected_df.sort_index(axis=1), result_df.sort_index(axis=1))
+        assert_frame_equal(
+            expected_df.sort_index(axis=1), result_df.sort_index(axis=1)
+        )
 
 
 if __name__ == "__main__":

@@ -57,10 +57,11 @@ class ProcessTest(unittest.TestCase):
             self.assertEqual(expected_mb_reads, actual_mb_reads)
             self.assertEqual(
                 expected_filter_ratio,
-                str(int(actual_filtered_reads)/ int(actual_raw_reads)),
+                str(int(actual_filtered_reads) / int(actual_raw_reads)),
             )
             self.assertEqual(
-                expected_mb_ratio, str(int(actual_mb_reads) / int(actual_filtered_reads))
+                expected_mb_ratio,
+                str(int(actual_mb_reads) / int(actual_filtered_reads)),
             )
 
         # now remove the host filtered reads, and run again, make sure the fastp files go away

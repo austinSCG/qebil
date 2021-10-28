@@ -353,9 +353,7 @@ class utilTest(unittest.TestCase):
         test_local_fastq_path = _TEST_SUPPORT_DIR + "/SRR13874871.fastq.gz"
         expected_md5 = "06445ed5341e3779ac1d5230c787c538"
         self.assertTrue(path.isfile(test_local_fastq_path))
-        md5checksum_res = get_checksum(
-            test_local_fastq_path, expected_md5
-        )
+        md5checksum_res = get_checksum(test_local_fastq_path, expected_md5)
         self.assertEqual(expected_md5, md5checksum_res)
 
     def test_parse_document(self):
@@ -443,23 +441,25 @@ class utilTest(unittest.TestCase):
             "5c1da3b86d2bbb0d09e1f05cef0107f2;"
             + "fe207ea59d80b5143e142050e37bbd11"
         )
-        
-        test_fastq_bytes_string = ("411122459;446055180")
+
+        test_fastq_bytes_string = "411122459;446055180"
         test_unpack_result = unpack_fastq_ftp(
-            test_fastq_ftp_string, test_fastq_md5_string, test_fastq_bytes_string , 2
+            test_fastq_ftp_string,
+            test_fastq_md5_string,
+            test_fastq_bytes_string,
+            2,
         )
         test_read_dict = {
             "read_1": {
                 "ftp": test_fastq_ftp_string.split(";")[0],
                 "md5": test_fastq_md5_string.split(";")[0],
-                'bytes': 411122459
+                "bytes": 411122459,
             },
             "read_2": {
                 "ftp": test_fastq_ftp_string.split(";")[1],
                 "md5": test_fastq_md5_string.split(";")[1],
-                'bytes': 446055180
+                "bytes": 446055180,
             },
-            
         }
         self.assertEqual(test_unpack_result[0], test_read_dict)
 
@@ -467,8 +467,8 @@ class utilTest(unittest.TestCase):
         # set up files
         test_dict = {}
         test_fastq_path = _TEST_SUPPORT_DIR + "/SRR13874871.fastq.gz"
-        
-        for r in range(1,4):
+
+        for r in range(1, 4):
             fq_src = (
                 _TEST_SUPPORT_DIR
                 + "/SAMN07663020.SRR6050387.R"
@@ -481,12 +481,12 @@ class utilTest(unittest.TestCase):
                 + str(r)
                 + ".ebi.fastq.gz"
             )
-            copy (fq_src,fq_test)
-            test_dict['read'+str(r)] = {}
-            test_dict['read'+str(r)]['fp'] = fq_test
-            test_dict['read'+str(r)]['md5'] = get_checksum(fq_test)
-        
-        #print(test_fastq_path)
+            copy(fq_src, fq_test)
+            test_dict["read" + str(r)] = {}
+            test_dict["read" + str(r)]["fp"] = fq_test
+            test_dict["read" + str(r)]["md5"] = get_checksum(fq_test)
+
+        # print(test_fastq_path)
         """
         for r in range(1, 4):
             r_clone = test_fastq_path.replace(
@@ -499,9 +499,10 @@ class utilTest(unittest.TestCase):
         remove_index_read_file(test_dict, "PAIRED")
 
         # confirm behavior
-        self.assertTrue(path.isfile(test_dict["read1"]['fp']))
-        self.assertTrue(path.isfile(test_dict["read2"]['fp']))
+        self.assertTrue(path.isfile(test_dict["read1"]["fp"]))
+        self.assertTrue(path.isfile(test_dict["read2"]["fp"]))
         self.assertFalse("read3" in test_dict.keys())
+
 
 if __name__ == "__main__":
     # begin the unittest.main()
