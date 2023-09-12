@@ -65,7 +65,9 @@ git clone https://github.com/ucsd-cmi/qebil
 
 conda env create -n qebil --file qebil/qebil_env.yml
 
-pip install qebil 
+conda activate qebil
+
+pip install -e qebil
 ```
 
 If you choose to install in another environment, be sure to run the following command to ensure you have all the non-pip installable dependencies:
